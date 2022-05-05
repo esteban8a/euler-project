@@ -30,9 +30,28 @@ def is_prime(prime_cache : Array, number : Int)
 	return [true, prime_cache]
 end
 
+def calculate_largest_prime_on_steroids(number : Int)
+	n = number
+	factor = 2
+	last_factor = 1
+	while(n > 1)
+		if((n % factor) == 0 )
+			last_factor = factor
+			n = n / factor
+			while((n % factor) == 0)
+				n = n / factor
+			end
+		end
+		factor = factor + 1
+	end
+	return [n, last_factor]
+end
+
 # number = 13195
-# number = 30
-number = 600_851_475_143
+number = 54
+# number = 600_851_475_143
 print "Calculating largest prime factor......\n"
-factor = calculate_largest_prime_factor(number)
-print "Largest prime factor of #{number} is #{factor}\n"
+#factor = calculate_largest_prime_factor(number)
+#print "Largest prime factor of #{number} is #{factor}\n"
+
+print calculate_largest_prime_on_steroids(number)
