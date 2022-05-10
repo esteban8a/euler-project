@@ -1,0 +1,34 @@
+# If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+# Find the sum of all the multiples of 3 or 5 below 1000.
+
+defmodule Problem1 do
+	def calculate(counter, multiple1, multiple2, limit, multiples \\ []) do	
+		IO.puts("Evaluating #{counter}")
+		
+		cond do
+			counter <= 0 or counter == limit ->
+				multiples
+			counter < limit and ((rem(counter, multiple1) == 0) or ((rem(counter, multiple2) == 0))) ->
+				calculate(counter + 1, multiple1, multiple2, limit, [counter] ++ multiples)
+			true ->
+				calculate(counter + 1, multiple1, multiple2, limit, multiples)
+		end
+		
+		#if(counter > 0 && counter < limit) do
+		#	if((rem(counter, multiple1) == 0) || (rem(counter, multiple2) == 0)) do
+		#		calculate(counter + 1, multiple1, multiple2, limit,  multiples ++ [counter])
+		#	else
+		#		calculate(counter + 1, multiple1, multiple2, limit,  multiples)
+		#	end
+		#else
+		#	IO.puts "Preparing to return!!!"
+		#	multiples
+		#end
+	end
+end
+
+
+results =  Problem1.calculate(1, 3, 5, 1000, [0])
+
+total = Enum.reduce(results, 0, fn(x), acc -> x + acc end)
+IO.puts("The result is " <> to_string(total)) 
