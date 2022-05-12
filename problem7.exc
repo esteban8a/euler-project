@@ -1,0 +1,20 @@
+# By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+# What is the 10 001st prime number?
+# import EulerProject
+
+defmodule Problem7 do
+	def calculate(number_of_desired_primes, number \\ 2, primes \\ []) do
+		# IO.puts "Checking #{number_of_desired_primes}, #{number}"
+		cond do
+			(length(primes) == number_of_desired_primes) -> List.last(primes)
+			(EulerProject.is_prime(number)) -> 
+				calculate(number_of_desired_primes, number + 1, primes ++ [number])
+			length(primes) < number_of_desired_primes -> calculate(number_of_desired_primes, number + 1, primes)
+			
+		end
+	end
+end
+
+
+IO.puts "Prime number is #{to_string(Problem7.calculate(10_001))}"
+

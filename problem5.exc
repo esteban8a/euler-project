@@ -1,0 +1,37 @@
+# 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+# What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+defmodule Problem5 do
+	
+	def	calculate(number_to_divide, lower_limit, higher_limit) do
+		IO.puts "Checking #{number_to_divide}"
+		divisile = is_divisible_by_all_numbers(number_to_divide, lower_limit, higher_limit)
+		
+		cond do
+			divisile -> number_to_divide
+			!divisile -> calculate(number_to_divide + 1, lower_limit, higher_limit)
+			true -> 1
+		end
+	end
+	
+	def is_divisible_by_all_numbers(number_to_divide, lower_limit, higher_limit) do
+		
+		divisors = Enum.map lower_limit..higher_limit, fn(x) ->
+								if(rem(number_to_divide, x) == 0)	do
+									1
+								else
+									0
+								end
+							end
+		
+		if(Enum.sum(divisors) == higher_limit) do
+			true
+		else
+			false
+		end
+	end
+	
+end
+
+result = Problem5.calculate(11, 1, 20)
+IO.puts "Calculating: #{result}"

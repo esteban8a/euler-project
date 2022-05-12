@@ -1,0 +1,19 @@
+# This module contains functions to be reused based on learning.
+defmodule EulerProject do
+	def is_prime(number) do
+		last_digit = Integer.digits(number) |> List.last()
+		if(Enum.member?([0,2,4,5,6,8], last_digit) or rem(Enum.sum(Integer.digits(number)), 3) == 0) do
+			false
+		end
+		!has_factors(number)
+	end
+
+	# Check if has factors other than 2 and the number itself.
+	defp has_factors(number, factor \\ 2) do
+		cond do
+			factor < number and rem(number, factor) == 0 -> true
+			factor < number -> has_factors(number, factor + 1)
+			true -> false
+		end
+	end
+end

@@ -1,0 +1,14 @@
+# The sum of the squares of the first ten natural numbers is 385.
+# The square of the sum of the first ten natural numbers is 3025.
+# Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is # 3025 - 385 = 2640.
+# Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum
+
+defmodule Problem6 do
+	def calculate(limit) do
+		sum_of_squares = Enum.reduce(1..limit, 0, fn(x,acc) -> x*x + acc end)
+		Enum.reduce(1..limit, 0, fn(x,acc) -> x + acc end) |> :math.pow(2) |> Kernel.-(sum_of_squares)
+	end	
+end
+
+
+IO.puts "Problem6 results: #{to_string(Problem6.calculate(100))}"
